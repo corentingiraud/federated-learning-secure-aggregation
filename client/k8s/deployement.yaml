@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-deployment
+  labels:
+    app: client
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: client
+  template:
+    metadata:
+      labels:
+        app: client
+    spec:
+      containers:
+        - name: client
+          image: kistora/android-federated-client
+          env:
+            - name: SERVER_IP
+              value: 'https://server:3000'

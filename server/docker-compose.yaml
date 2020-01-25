@@ -1,0 +1,33 @@
+version: '3'
+services:
+  web:
+    build: .
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/server
+    environment:
+      FLASK_ENV: development
+      FLASK_DEBUG: 1
+    depends_on:
+      - db
+  
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: federated
+      POSTGRES_PASSWORD: root
+      PGDATA: /data/postgres
+  
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: root
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
+    restart: unless-stopped
