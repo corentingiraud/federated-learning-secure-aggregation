@@ -431,7 +431,7 @@ def postShares(idTry):
         if client.giveShares:
             readyClients.append(client)
     
-    if len(readyClients) == currentTry.threshold:
+    if len(readyClients) >= currentTry.threshold:
         # COMPUTE GLOBAL SUM
         globalSum = np.zeros(CLIENT_SECRET_SIZE, dtype=np.dtype('d'))
         
